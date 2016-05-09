@@ -6,8 +6,7 @@ var RequestHeaderSentValue = function() {
 		if(this.req !== null) {
 			exchange = this.req.getLastExchange();
 		} else {
-			this.req = context.getCurrentRequest();
-			exchange = this.req.getLastExchange();
+			exchange = context.getCurrentRequest().getLastExchange();
 		}
 
 

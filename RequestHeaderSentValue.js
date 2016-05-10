@@ -1,14 +1,24 @@
 var RequestHeaderSentValue = function() {
 	this.evaluate = function(context) {
 
-		var exchange = this.req.getLastExchange();
+		var exchange;
+
+		if(this.req !== null) {
+			exchange = this.req.getLastExchange();
+		} else {
+			exchange = context.getCurrentRequest().getLastExchange();
+		}
+
 
 		var headerValue = exchange.getRequestHeaderByName(this.header);
 		return headerValue;
 	}
 
 	this.text = function(context) {
-		return this.req.name + " ➤ " + this.header;
+		if(this.req !== null) {
+			return this.req.name + " ➤ " + this.header;
+		}
+		return this.header;
 	}
 }
 
